@@ -1,0 +1,75 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import LanguageLinks from './LanguageLinks.astro';
+import { content, type Locale } from '../i18n/content';
+import { getCaseStudies } from '../lib/caseStudies';
+
+interface Props {
+  locale: Locale;
+  slug: string;
+}
+
+const { locale, slug } = Astro.props;
+const t = content[locale];
+
+const studies = await getCaseStudies(locale);
+const index = studies.findIndex((s) => s.slug === slug);
+const { entry } = studies[index];
+const next = studies.length > 1 ? studies[(index + 1) % studies.length] : null;
+const { Content } = await render(entry);
+
+const home = getRelativeLocaleUrl(locale, '');
+const path = `work/${slug}/`;
+---
+
+<Base locale={locale} title={`${entry.data.title}, ${t.name}`} description={entry.data.summary} path={path}>
+  <header class="case-header">
+    <a class="case-name" href={home}>{t.name}</a>
+    <nav class="nav" aria-label={t.nav.label}>
+      <a href={`${home}#work`}>{t.nav.allWork}</a>
+      <a href={`${home}#contact`}>{t.nav.contact}</a>
+      <LanguageLinks locale={locale} path={path} />
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="case-intro" aria-labelledby="case-title">
+      <h1 id="case-title" class="case-title">{entry.data.title}</h1>
+      <p class="case-summary">{entry.data.summary}</p>
+    </section>
+
+    <dl class="case-meta">
+      <div><dt>{t.work.metaRole}</dt><dd>{entry.data.role}</dd></div>
+      <div><dt>{t.caseStudy.team}</dt><dd>{entry.data.team}</dd></div>
+      <div><dt>{t.work.metaWhen}</dt><dd>{entry.data.when}</dd></div>
+      <div><dt>{t.work.metaStack}</dt><dd>{entry.data.stack}</dd></div>
+    </dl>
+
+    <section class="case-result on-ink" aria-label={t.caseStudy.resultLabel}>
+      <p class="label">{t.caseStudy.resultLabel}</p>
+      <p class="statement">{entry.data.result}</p>
+    </section>
+
+    <article class="case-body">
+      <Content />
+    </article>
+  </main>
+
+  <footer class="case-footer on-ink">
+    {
+      next ? (
+        <div class="case-next">
+          <p class="label">{t.caseStudy.next}</p>
+          <a href={getRelativeLocaleUrl(locale, `work/${next.slug}/`)}>{next.entry.data.title}</a>
+        </div>
+      ) : (
+        <div class="case-next">
+          <a href={`${home}#work`}>{t.nav.allWork}</a>
+        </div>
+      )
+    }
+    <a class="tap" href={`${home}#contact`}>{t.nav.contact}</a>
+  </footer>
+</Base>

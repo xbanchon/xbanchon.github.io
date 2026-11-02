@@ -1,0 +1,13 @@
+---
+import CaseStudy from '../../../components/CaseStudy.astro';
+import { getCaseStudies } from '../../../lib/caseStudies';
+
+export async function getStaticPaths() {
+  const studies = await getCaseStudies('es');
+  return studies.map(({ slug }) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+---
+
+<CaseStudy locale="es" slug={slug} />

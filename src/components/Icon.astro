@@ -1,0 +1,14 @@
+---
+interface Props {
+  name: 'arrow' | 'download';
+}
+
+const paths = {
+  arrow: 'M2 8h11M9 4l4 4-4 4',
+  download: 'M8 2v10M4 8l4 4 4-4',
+};
+---
+
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+  <path d={paths[Astro.props.name]}></path>
+</svg>

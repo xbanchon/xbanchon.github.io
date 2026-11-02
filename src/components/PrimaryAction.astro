@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+import { content, links, resume, type Locale } from '../i18n/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { actions } = content[locale];
+const file = resume[locale];
+---
+
+{
+  file ? (
+    <a class="btn" href={file} download>
+      {actions.resume}
+      <Icon name="download" />
+    </a>
+  ) : (
+    <a class="btn" href={`mailto:${links.email}`}>
+      {actions.email}
+      <Icon name="arrow" />
+    </a>
+  )
+}

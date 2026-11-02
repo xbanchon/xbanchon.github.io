@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+npm-debug.log*
+
+# The source resumes in the project root contain a phone number and education.
+# Only PDFs placed deliberately in public/resume/ are published.
+/*.pdf

@@ -1,0 +1,20 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import Base from '../layouts/Base.astro';
+import { content, locales } from '../i18n/content';
+
+const t = content.en;
+---
+
+<Base locale="en" title={`${t.notFound.title}, ${t.name}`} description={t.notFound.body} noindex>
+  <main id="main" class="not-found">
+    <h1 class="section-title">{t.notFound.title}</h1>
+    {
+      locales.map((l) => (
+        <p lang={l}>
+          {content[l].notFound.body} <a href={getRelativeLocaleUrl(l, '')}>{content[l].notFound.home}</a>
+        </p>
+      ))
+    }
+  </main>
+</Base>

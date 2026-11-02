@@ -1,0 +1,206 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import Base from '../layouts/Base.astro';
+import Icon from './Icon.astro';
+import LanguageLinks from './LanguageLinks.astro';
+import PrimaryAction from './PrimaryAction.astro';
+import { content, links, resume, type Locale } from '../i18n/content';
+import { getCaseStudies } from '../lib/caseStudies';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = content[locale];
+const resumeFile = resume[locale];
+
+const studies = new Set((await getCaseStudies(locale)).map((s) => s.slug));
+const studyUrl = (slug: string) => (studies.has(slug) ? getRelativeLocaleUrl(locale, `work/${slug}/`) : null);
+const leadStudy = studyUrl(t.lead.slug);
+const year = new Date().getFullYear();
+---
+
+<Base locale={locale} title={`${t.name}, ${t.title}`} description={t.description}>
+  <header id="top" class="masthead">
+    <nav class="nav" aria-label={t.nav.label}>
+      <a href="#work">{t.nav.work}</a>
+      <a href="#archive">{t.nav.archive}</a>
+      <a href="#about">{t.nav.about}</a>
+      <a href="#contact">{t.nav.contact}</a>
+      <LanguageLinks locale={locale} />
+    </nav>
+    <h1 class="nameplate">{t.name}</h1>
+    <p class="dateline">
+      <span>{t.title}</span>
+      <span>{t.location}</span>
+      <span>{t.availability}</span>
+    </p>
+  </header>
+
+  <main id="main">
+    <section class="intro" aria-label={t.title}>
+      <p class="pitch">{t.pitch.before}<span class="accent">{t.pitch.accent}</span>{t.pitch.after}</p>
+      <div class="intro-actions">
+        <PrimaryAction locale={locale} />
+        <a class="tap tap-quiet" href="#work">{t.actions.seeWork}</a>
+      </div>
+    </section>
+
+    <section class="glance" aria-label={t.glanceLabel}>
+      {
+        t.glance.map((item) => (
+          <div>
+            <h2 class="label">{item.label}</h2>
+            <p>{item.value}</p>
+          </div>
+        ))
+      }
+    </section>
+
+    <section id="work" class="work" aria-labelledby="work-title">
+      <div class="section-head">
+        <h2 id="work-title" class="section-title">{t.work.title}</h2>
+        <a class="tap tap-quiet" href="#archive">{t.work.archiveLink}</a>
+      </div>
+
+      <article class="lead on-ink">
+        <div class="lead-side">
+          <p class="lead-number" aria-hidden="true">01</p>
+          <dl class="lead-meta">
+            <div><dt>{t.work.metaRole}</dt><dd>{t.lead.role}</dd></div>
+            <div><dt>{t.work.metaStack}</dt><dd>{t.lead.stack}</dd></div>
+            <div><dt>{t.work.metaWhen}</dt><dd>{t.lead.when}</dd></div>
+          </dl>
+        </div>
+        <div class="lead-main">
+          <h3 class="lead-title">{t.lead.title}</h3>
+          <p class="lead-summary">{t.lead.summary}</p>
+          <div class="lead-result">
+            <p class="label">{t.work.resultLabel}</p>
+            <p class="statement"><span class="accent">{t.lead.result.accent}</span>{t.lead.result.after}</p>
+            <p class="meta">{t.lead.detail}</p>
+          </div>
+          {
+            leadStudy && (
+              <a class="tap" href={leadStudy}>
+                {t.actions.caseStudy}
+                <Icon name="arrow" />
+              </a>
+            )
+          }
+        </div>
+      </article>
+
+      <div class="features">
+        {
+          t.features.map((feature) => {
+            const study = studyUrl(feature.slug);
+            return (
+              <article class="feature">
+                <p class="feature-number" aria-hidden="true">{feature.number}</p>
+                <h3 class="feature-title">{feature.title}</h3>
+                <p class="feature-summary">{feature.summary}</p>
+                <p class="statement">{feature.outcome}</p>
+                <p class="meta">{feature.meta}</p>
+                {(study || feature.code) && (
+                  <div class="feature-links">
+                    {study && (
+                      <a class="tap" href={study}>
+                        {t.actions.caseStudy}
+                        <Icon name="arrow" />
+                      </a>
+                    )}
+                    {feature.code && (
+                      <a class="tap" href={feature.code}>
+                        {t.actions.code}
+                      </a>
+                    )}
+                  </div>
+                )}
+              </article>
+            );
+          })
+        }
+      </div>
+    </section>
+
+    <section id="archive" class="archive" aria-labelledby="archive-title">
+      <h2 id="archive-title" class="section-title">{t.archive.title}</h2>
+      <div class="table-scroll" tabindex="0" role="region" aria-label={t.archive.regionLabel}>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">{t.archive.columns.year}</th>
+              <th scope="col">{t.archive.columns.project}</th>
+              <th scope="col">{t.archive.columns.what}</th>
+              <th scope="col">{t.archive.columns.stack}</th>
+              <th scope="col">{t.archive.columns.link}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              t.archive.rows.map((row) => (
+                <tr>
+                  <td class="cell-mono">{row.year}</td>
+                  <td class="cell-name">{row.project}</td>
+                  <td>{row.what}</td>
+                  <td class="cell-mono">{row.stack}</td>
+                  <td class="cell-mono">
+                    {row.href ? (
+                      <a href={row.href} aria-label={`${t.archive.codeLabel}: ${row.project}`}>
+                        {t.archive.codeLabel}
+                      </a>
+                    ) : (
+                      row.linkText
+                    )}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="about-text">
+        <h2 class="section-title">{t.about.title}</h2>
+        <p>{t.about.body}</p>
+      </div>
+      <div class="experience">
+        <h2 class="label">{t.about.experienceTitle}</h2>
+        {
+          t.about.experience.map((job) => (
+            <div class="job">
+              <p class="job-dates meta">{job.dates}</p>
+              <div class="job-detail">
+                <h3>{job.role}</h3>
+                <p>{job.impact}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="contact on-ink">
+    <div class="contact-main">
+      <h2 class="contact-title">{t.contact.before}<span class="accent">{t.contact.accent}</span>{t.contact.after}</h2>
+      <div class="contact-links">
+        <a class="btn" href={`mailto:${links.email}`}>
+          {t.actions.email}
+          <Icon name="arrow" />
+        </a>
+        {resumeFile && <a class="tap tap-quiet" href={resumeFile} download>{t.actions.resume}</a>}
+        <a class="tap tap-quiet" href={links.github}>GitHub</a>
+        <a class="tap tap-quiet" href={links.linkedin}>LinkedIn</a>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>© {year} {t.name}</span>
+      <a href="#top">{t.actions.backToTop}</a>
+    </div>
+  </footer>
+</Base>
