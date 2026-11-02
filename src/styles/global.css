@@ -197,6 +197,31 @@ a:focus-visible {
   color: var(--ink);
 }
 
+/* Copy email: a button that looks like the links beside it. */
+
+.copy-email {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
+.copy-email[hidden] {
+  display: none;
+}
+
+.copy-email:hover {
+  color: var(--accent-on-ink);
+}
+
+.copy-email:focus-visible {
+  outline: 2px solid var(--accent-on-ink);
+  outline-offset: 3px;
+}
+
 /* Navigation */
 
 .nav {
@@ -814,6 +839,12 @@ a:focus-visible {
   line-height: 1.02;
   letter-spacing: -0.035em;
   text-decoration: none;
+}
+
+.case-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 28px;
 }
 
 /* 404 */

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://xbanchon.github.io/sitemap-index.xml

@@ -1,0 +1,35 @@
+---
+import { content, links, type Locale } from '../i18n/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { actions } = content[Astro.props.locale];
+---
+
+<!-- Hidden until the script below runs, so it never appears without working. -->
+<button class="tap tap-quiet copy-email" type="button" data-email={links.email} data-copied={actions.emailCopied} hidden>
+  {actions.copyEmail}
+</button>
+
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>('.copy-email')) {
+    const { email = '', copied = '' } = button.dataset;
+    const label = button.textContent ?? '';
+    let timer: ReturnType<typeof setTimeout>;
+
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+        button.textContent = copied;
+        clearTimeout(timer);
+        timer = setTimeout(() => (button.textContent = label), 2500);
+      } catch {
+        // Copying can be blocked, so show the address for the visitor to copy by hand.
+        button.textContent = email;
+      }
+    });
+  }
+</script>

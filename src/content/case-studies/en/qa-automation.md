@@ -5,7 +5,7 @@ role: QA Automation Engineer, Binasystem
 team: 7 people
 when: 2026 to present
 stack: Playwright, Azure DevOps
-result: Regression testing went from over 4 hours to roughly 2, with 60+ test cases automated in Playwright.
+result: Regression testing went from over 4 hours to roughly 2, up to 55% less time, with 60+ test cases automated in Playwright.
 order: 1
 draft: false
 ---
@@ -16,7 +16,7 @@ Every three weeks, regression testing meant half a day of manual work, more than
 
 ## What I built
 
-I automated 60+ test cases with Playwright and organized them using page objects. That took regression testing from over four hours to roughly two.
+I automated 60+ test cases with Playwright and organized them using page objects. That took regression testing from over four hours to roughly two. My best run went from about 4.5 hours to 2, a 55% cut.
 
 I currently run the tests by hand. The next step I'm hoping for is to bring them into a CI/CD pipeline.
 

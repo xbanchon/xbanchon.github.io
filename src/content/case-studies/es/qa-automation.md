@@ -5,7 +5,7 @@ role: Ingeniero de automatización QA, Binasystem
 team: 7 personas
 when: 2026 a la actualidad
 stack: Playwright, Azure DevOps
-result: Las pruebas de regresión pasaron de más de 4 horas a unas 2, con más de 60 casos de prueba automatizados en Playwright.
+result: Las pruebas de regresión pasaron de más de 4 horas a unas 2, hasta 55% menos de tiempo, con más de 60 casos de prueba automatizados en Playwright.
 order: 1
 draft: false
 ---
@@ -16,7 +16,7 @@ Cada tres semanas, las pruebas de regresión significaban medio día de trabajo 
 
 ## Lo que construí
 
-Automaticé más de 60 casos de prueba con Playwright y los organicé con page objects. Eso redujo las pruebas de regresión de más de cuatro horas a unas dos.
+Automaticé más de 60 casos de prueba con Playwright y los organicé con page objects. Eso redujo las pruebas de regresión de más de cuatro horas a unas dos. Mi mejor ejecución pasó de unas 4,5 horas a 2, una reducción de 55%.
 
 Por ahora ejecuto las pruebas manualmente. El siguiente paso que espero dar es incorporarlas a un pipeline de CI/CD.
 

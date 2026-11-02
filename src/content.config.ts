@@ -12,6 +12,8 @@ const caseStudies = defineCollection({
     when: z.string(),
     stack: z.string(),
     result: z.string(),
+    // Link to the project's public code, shown in the page footer when set.
+    code: z.url().optional(),
     order: z.number(),
     // Drafts show up in `npm run dev` but are left out of the published site.
     draft: z.boolean().default(true),

@@ -6,6 +6,7 @@ team: Solo project
 when: "2026"
 stack: Java 21, Spring Boot, Spring Cloud Gateway, RabbitMQ, PostgreSQL, Supabase, Docker
 result: A working image pipeline, built alone across four services, that crops, resizes, blurs and filters images.
+code: https://github.com/xbanchon/Focal
 order: 2
 draft: false
 ---

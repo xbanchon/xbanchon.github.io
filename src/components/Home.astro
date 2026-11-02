@@ -1,6 +1,7 @@
 ---
-import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getAbsoluteLocaleUrl, getRelativeLocaleUrl } from 'astro:i18n';
 import Base from '../layouts/Base.astro';
+import CopyEmail from './CopyEmail.astro';
 import Icon from './Icon.astro';
 import LanguageLinks from './LanguageLinks.astro';
 import PrimaryAction from './PrimaryAction.astro';
@@ -19,9 +20,20 @@ const studies = new Set((await getCaseStudies(locale)).map((s) => s.slug));
 const studyUrl = (slug: string) => (studies.has(slug) ? getRelativeLocaleUrl(locale, `work/${slug}/`) : null);
 const leadStudy = studyUrl(t.lead.slug);
 const year = new Date().getFullYear();
+
+// Tells search engines who this site is about. No email, phone or education.
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: t.name,
+  jobTitle: t.title,
+  url: getAbsoluteLocaleUrl(locale, ''),
+  sameAs: [links.github, links.linkedin],
+};
 ---
 
 <Base locale={locale} title={`${t.name}, ${t.title}`} description={t.description}>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(person)} />
   <header id="top" class="masthead">
     <nav class="nav" aria-label={t.nav.label}>
       <a href="#work">{t.nav.work}</a>
@@ -193,7 +205,8 @@ const year = new Date().getFullYear();
           {t.actions.email}
           <Icon name="arrow" />
         </a>
-        {resumeFile && <a class="tap tap-quiet" href={resumeFile} download>{t.actions.resume}</a>}
+        <CopyEmail locale={locale} />
+        {resumeFile && <a class="tap tap-quiet" href={resumeFile} download data-goatcounter-click={`resume-${locale}`}>{t.actions.resume}</a>}
         <a class="tap tap-quiet" href={links.github}>GitHub</a>
         <a class="tap tap-quiet" href={links.linkedin}>LinkedIn</a>
       </div>

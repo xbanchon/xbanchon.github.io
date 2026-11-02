@@ -6,6 +6,7 @@ team: Proyecto individual
 when: "2026"
 stack: Java 21, Spring Boot, Spring Cloud Gateway, RabbitMQ, PostgreSQL, Supabase, Docker
 result: Un pipeline de imágenes funcional, construido por mí en cuatro servicios, que recorta, redimensiona, desenfoca y filtra imágenes.
+code: https://github.com/xbanchon/Focal
 order: 2
 draft: false
 ---

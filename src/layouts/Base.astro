@@ -5,7 +5,7 @@ import '@fontsource-variable/newsreader/opsz.css';
 import '@fontsource/ibm-plex-mono/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
 import '../styles/global.css';
-import { locales, type Locale } from '../i18n/content';
+import { goatCounterCode, locales, type Locale } from '../i18n/content';
 
 interface Props {
   locale: Locale;
@@ -19,6 +19,11 @@ interface Props {
 const { locale, title, description, path = '', noindex = false } = Astro.props;
 const canonical = getAbsoluteLocaleUrl(locale, path);
 const skipLabel = locale === 'es' ? 'Saltar al contenido' : 'Skip to content';
+const shareImage = new URL(`/og-${locale}.png`, Astro.site).href;
+const shareImageAlt =
+  locale === 'es'
+    ? 'Xavier Banchón González, ingeniero de automatización QA'
+    : 'Xavier Banchon Gonzalez, QA automation engineer';
 ---
 
 <!doctype html>
@@ -45,7 +50,18 @@ const skipLabel = locale === 'es' ? 'Saltar al contenido' : 'Skip to content';
           <meta property="og:description" content={description} />
           <meta property="og:url" content={canonical} />
           <meta property="og:locale" content={locale === 'es' ? 'es_EC' : 'en_US'} />
+          <meta property="og:image" content={shareImage} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:alt" content={shareImageAlt} />
+          <meta name="twitter:card" content="summary_large_image" />
         </>
+      )
+    }
+    <slot name="head" />
+    {
+      import.meta.env.PROD && goatCounterCode && (
+        <script is:inline data-goatcounter={`https://${goatCounterCode}.goatcounter.com/count`} async src="https://gc.zgo.at/count.js" />
       )
     }
   </head>

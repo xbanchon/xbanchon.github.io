@@ -19,6 +19,10 @@ export const resume: Record<Locale, string | null> = {
   es: '/resume/xavier-banchon-gonzalez-es.pdf',
 };
 
+// GoatCounter site code, such as "xbanchon" for xbanchon.goatcounter.com. While it's
+// null, the published site loads no analytics script.
+export const goatCounterCode: string | null = 'xbanchon';
+
 const repo = (name: string) => `${links.github}/${name}`;
 
 export const content = {
@@ -26,7 +30,7 @@ export const content = {
     name: 'Xavier Banchon Gonzalez',
     title: 'QA automation engineer',
     location: 'Samborondon, Ecuador',
-    availability: 'Open to remote work',
+    availability: 'Open to remote QA automation roles · UTC-5',
     description:
       'QA automation engineer experienced in software testing and test automation for web and mobile apps in retail, financial services and industry.',
     nav: {
@@ -42,13 +46,15 @@ export const content = {
       es: 'Ver en español',
     },
     pitch: {
-      before: 'I build ',
-      accent: 'automated test systems',
+      before: 'I ',
+      accent: 'automate testing',
       after: ' for web and mobile apps in retail, financial services and industry.',
     },
     actions: {
       resume: 'Download resume',
       email: 'Email me',
+      copyEmail: 'Copy email',
+      emailCopied: 'Email copied',
       seeWork: 'See the work',
       caseStudy: 'Read the case study',
       code: 'View the code',
@@ -58,7 +64,6 @@ export const content = {
     glance: [
       { label: 'Automation', value: 'Playwright, Appium, JavaScript/TypeScript' },
       { label: 'Also works with', value: 'REST APIs, SQL, Apache JMeter, Docker, Git, Linux' },
-      { label: 'Code security', value: 'OWASP ZAP, SonarQube, OSV' },
       { label: 'Languages', value: 'Spanish (native), English (B1/B2)' },
     ],
     work: {
@@ -78,7 +83,8 @@ export const content = {
       stack: 'Playwright, Azure DevOps',
       when: '2026 to present',
       result: { accent: 'Up to 55% less time', after: ' spent executing regression testing' },
-      detail: '60+ test cases fully automated with Playwright · 8+ test plans across 5+ enterprise projects',
+      detail:
+        'From over 4 hours to roughly 2 · 60+ test cases fully automated with Playwright · 8+ test plans across 5+ enterprise projects',
     },
     features: [
       {
@@ -86,7 +92,7 @@ export const content = {
         number: '02',
         title: 'Focal',
         summary: 'An asynchronous image processing pipeline built in Java with Spring Boot.',
-        outcome: 'Software security, rate limiting, microservices, APIs, queue management and cloud services',
+        outcome: 'Software security, microservices, APIs, queue management and cloud services',
         meta: 'Project · Java, Spring Boot · 2026',
         code: repo('Focal'),
       },
@@ -131,19 +137,11 @@ export const content = {
           href: repo('broadcast-server'),
           linkText: null,
         },
-        {
-          year: '2024',
-          project: 'Automated reporting tool',
-          what: 'New features that improved cross-departmental communication and maintained data integrity across shared information',
-          stack: 'Telconet',
-          href: null,
-          linkText: 'Internal',
-        },
       ],
     },
     about: {
       title: 'About',
-      body: "I'm a QA automation engineer experienced in software testing and test automation for web and mobile applications across retail, financial services and industrial sectors. I'm skilled in test planning, test case design, functional testing and defect management using Azure DevOps, and proficient in Playwright and Appium, with working knowledge of Angular and Flutter. I'm also familiar with the SDLC, the STLC and application security testing methodologies, including SAST, DAST and SCA.",
+      body: "I'm a QA automation engineer experienced in software testing and test automation for web and mobile applications across retail, financial services and industrial sectors. I'm skilled in test planning, test case design, functional testing and defect management using Azure DevOps, and proficient in Playwright, with hands-on Appium experience and working knowledge of Angular and Flutter. I'm also familiar with the SDLC, the STLC and application security testing methodologies, including SAST, DAST and SCA.",
       experienceTitle: 'Experience',
       experience: [
         {
@@ -179,7 +177,7 @@ export const content = {
     name: 'Xavier Banchón González',
     title: 'Ingeniero de automatización QA',
     location: 'Samborondón, Ecuador',
-    availability: 'Disponible para trabajo remoto',
+    availability: 'Disponible para roles remotos de automatización QA · UTC-5',
     description:
       'Ingeniero de automatización QA con experiencia en pruebas de software y automatización de pruebas para aplicaciones web y móviles en retail, servicios financieros e industria.',
     nav: {
@@ -195,13 +193,15 @@ export const content = {
       es: 'Español, idioma actual',
     },
     pitch: {
-      before: 'Construyo ',
-      accent: 'sistemas automatizados de prueba',
+      before: '',
+      accent: 'Automatizo pruebas',
       after: ' para aplicaciones web y móviles en retail, servicios financieros e industria.',
     },
     actions: {
       resume: 'Descargar CV',
       email: 'Escríbeme',
+      copyEmail: 'Copiar correo',
+      emailCopied: 'Correo copiado',
       seeWork: 'Ver el trabajo',
       caseStudy: 'Leer el caso de estudio',
       code: 'Ver el código',
@@ -211,7 +211,6 @@ export const content = {
     glance: [
       { label: 'Automatización', value: 'Playwright, Appium, JavaScript/TypeScript' },
       { label: 'También trabajo con', value: 'APIs REST, SQL, Apache JMeter, Docker, Git, Linux' },
-      { label: 'Seguridad de código', value: 'OWASP ZAP, SonarQube, OSV' },
       { label: 'Idiomas', value: 'Español (nativo), inglés (B1/B2)' },
     ],
     work: {
@@ -232,7 +231,7 @@ export const content = {
       when: '2026 a la actualidad',
       result: { accent: 'Hasta 55% menos de tiempo', after: ' dedicado a ejecutar pruebas de regresión' },
       detail:
-        'Más de 60 casos de prueba totalmente automatizados con Playwright · Más de 8 planes de prueba en más de 5 proyectos empresariales',
+        'De más de 4 horas a unas 2 · Más de 60 casos de prueba totalmente automatizados con Playwright · Más de 8 planes de prueba en más de 5 proyectos empresariales',
     },
     features: [
       {
@@ -240,7 +239,7 @@ export const content = {
         number: '02',
         title: 'Focal',
         summary: 'Un pipeline asíncrono de procesamiento de imágenes, desarrollado en Java con Spring Boot.',
-        outcome: 'Seguridad de software, rate limiting, microservicios, APIs, gestión de colas y servicios en la nube',
+        outcome: 'Seguridad de software, microservicios, APIs, gestión de colas y servicios en la nube',
         meta: 'Proyecto · Java, Spring Boot · 2026',
         code: repo('Focal'),
       },
@@ -285,19 +284,11 @@ export const content = {
           href: repo('broadcast-server'),
           linkText: null,
         },
-        {
-          year: '2024',
-          project: 'Herramienta de reportería automática',
-          what: 'Nuevas funcionalidades que mejoraron la comunicación entre departamentos y mantuvieron la integridad de los datos compartidos',
-          stack: 'Telconet',
-          href: null,
-          linkText: 'Interna',
-        },
       ],
     },
     about: {
       title: 'Sobre mí',
-      body: 'Soy ingeniero de automatización QA, con experiencia en pruebas de software y automatización de pruebas para aplicaciones web y móviles en los sectores de retail, servicios financieros e industria. Tengo dominio de la planificación de pruebas, el diseño de casos de prueba, las pruebas funcionales y la gestión de defectos con Azure DevOps, manejo Playwright y Appium, y tengo conocimientos prácticos de Angular y Flutter. También estoy familiarizado con SDLC, STLC y metodologías de pruebas de seguridad de aplicaciones, incluidas SAST, DAST y SCA.',
+      body: 'Soy ingeniero de automatización QA, con experiencia en pruebas de software y automatización de pruebas para aplicaciones web y móviles en los sectores de retail, servicios financieros e industria. Tengo dominio de la planificación de pruebas, el diseño de casos de prueba, las pruebas funcionales y la gestión de defectos con Azure DevOps, manejo Playwright, tengo experiencia práctica con Appium y conocimientos prácticos de Angular y Flutter. También estoy familiarizado con SDLC, STLC y metodologías de pruebas de seguridad de aplicaciones, incluidas SAST, DAST y SCA.',
       experienceTitle: 'Experiencia',
       experience: [
         {
